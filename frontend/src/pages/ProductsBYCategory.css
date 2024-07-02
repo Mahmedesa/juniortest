@@ -1,0 +1,12 @@
+.productList{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    margin: 2rem;
+    padding:1rem;
+    
+}
+.card{
+    padding:1rem;
+    align-items: center;
+}

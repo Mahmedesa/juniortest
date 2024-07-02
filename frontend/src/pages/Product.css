@@ -1,0 +1,16 @@
+.product{
+    display:flex;
+    flex-wrap: wrap;
+    gap:3rem;
+    margin: 2rem;
+    padding:1rem;
+    
+}
+.images{
+    width: 5rem;
+    gap: 2rem;
+}
+.details{
+    width: 20rem;
+    margin-left: 0;
+}
