@@ -1,6 +1,6 @@
 import React from "react";
 import { useCategory } from "../hooks/useCategory";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ADD_ORDER_ITEM, useCart } from "../hooks/useCart";
 import { useMutation } from "@apollo/client";
 import "./ProductsBYCategory.css";
@@ -11,6 +11,7 @@ function ProductsByCategory() {
   console.log({ data, error, loading });
   const { error: cartError, loading: cartLoading } = useCart(); 
   const [addOrderItem] = useMutation(ADD_ORDER_ITEM); 
+  const navigate = useNavigate()
 
   if (error) return <p>Error: {error.message}</p>;
   if (cartError) return <p>Error loading cart: {cartError.message}</p>;
@@ -27,6 +28,7 @@ function ProductsByCategory() {
       .then((response) => {
         console.log("Product added to cart:", response.data.addOrderItem);
         alert("Product added to cart successfully!");
+        navigate("/")
       })
       .catch((error) => {
         console.error("Error adding product to cart:", error);
@@ -53,13 +55,14 @@ function ProductsByCategory() {
                 <p className="card-text">
                   {product.currency_symbol} {product.price}
                 </p>
-                <button
-                  className="btn btn-success"
-                  disabled={!product.inStock}
-                  onClick={() => handleAddToCart(product)}
-                >
-                  {product.inStock ? "Add to Cart" : "Out of Stock"}
-                </button>
+                {product.inStock && (
+                  <button
+                    className="btn btn-success"
+                    onClick={() => handleAddToCart(product)}
+                  >
+                    Add to Cart
+                  </button>
+                )}
               </div>
             </div>
           );

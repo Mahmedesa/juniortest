@@ -228,8 +228,9 @@ const Cart = ({ onClose }) => {
             <div className="card-body">
               <h5 className="card-title">{orderitem.product.name}</h5>
               <p className="card-text">
-                {orderitem.product.price} {orderitem.product.currency_symbol} X{" "}
-                {orderitem.quantity}
+                {orderitem.product.currency_symbol} {orderitem.product.price}  X
+                {" "}{orderitem.quantity}
+                
               </p>
             </div>
             <div>
@@ -307,7 +308,7 @@ const Cart = ({ onClose }) => {
         <Link to="/placeorder">
           <button
             className="btn btn-outline-success"
-            onClick={onClose} // Close the cart when placing the order
+            onClick={onClose} 
           >
             Place Order
           </button>

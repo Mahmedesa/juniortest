@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { useProduct } from "../hooks/useProduct";
 import { ADD_ORDER_ITEM } from "../hooks/useCart";
@@ -11,8 +11,10 @@ function Product() {
   const [selectedAttributes, setSelectedAttributes] = useState({});
   const [quantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+  const navigate = useNavigate()
   const [addOrderItem] = useMutation(ADD_ORDER_ITEM);
+
+  
 
   if (error) return <p>Error: {error.message}</p>;
   if (loading) return <p>Loading...</p>;
@@ -56,6 +58,7 @@ function Product() {
         },
       });
       alert("Product added to cart successfully!");
+      navigate("/")
     } catch (err) {
       console.error("Error adding to cart", err);
       alert("Failed to add product to cart.");
@@ -77,6 +80,7 @@ function Product() {
   const handleImageClick = (index) => {
     setCurrentImageIndex(index);
   };
+
 
   return (
     <div className="product">
@@ -172,7 +176,7 @@ function Product() {
         </div>
         <h5>Price:</h5>
         <h5>
-          {data?.product.price} {data?.product.currency_symbol}
+          {data?.product.currency_symbol} {data?.product.price}
         </h5>
         <button
           className="btn btn-success"

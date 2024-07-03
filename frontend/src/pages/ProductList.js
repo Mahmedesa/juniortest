@@ -35,6 +35,8 @@ function ProductList() {
   };
 
   return (
+    <div> 
+      <h3> all </h3>
     <div className="productList">
       {data?.products?.map((product) => (
         <div className="card" style={{ width: "18rem" }} key={product.id}>
@@ -50,16 +52,18 @@ function ProductList() {
             <p className="card-text">
               {product.currency_symbol} {product.price}
             </p>
-            <button
-              className="btn btn-success"
-              disabled={!product.inStock}
-              onClick={() => handleAddToCart(product)}
-            >
-              {product.inStock ? "Add to Cart" : "Out of Stock"}
-            </button>
+            {product.inStock && (
+                  <button
+                    className="btn btn-success"
+                    onClick={() => handleAddToCart(product)}
+                  >
+                    Add to Cart
+                  </button>
+                )}
           </div>
         </div>
       ))}
+    </div>
     </div>
   );
 }
